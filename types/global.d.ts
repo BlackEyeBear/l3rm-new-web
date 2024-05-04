@@ -2,8 +2,8 @@
  * @Author: panda
  * @Date: 2024-05-03 14:35:10
  * @LastEditors: panda
- * @LastEditTime: 2024-05-03 14:49:02
- * @FilePath: /l3rm-web/Users/admin/Desktop/8eghticar/l3rm-new-web/types/global.d.ts
+ * @LastEditTime: 2024-05-04 22:37:41
+ * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\types\global.d.ts
  * @Description: 全局接口
  */
 
@@ -28,15 +28,9 @@ declare interface ViteEnv {
 	VITE_BUILD_COMPRESS: 'gzip' | 'brotli' | 'none'
 	VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean
 }
-
-declare interface ImportMetaEnv extends ViteEnv {
-	__: unknown
-}
-
 interface ImportMeta {
-	readonly env: ImportMetaEnv
+	readonly env: ViteEnv
 	VITE_IS_BUILD: boolean
-	// readonly development: ImportMetaEnvDev
 }
 
 // 允许加载json文件
@@ -59,8 +53,6 @@ declare type TargetContext = '_self' | '_blank'
 
 // 时间范围
 declare type DateRange = { startDate: string; endDate: string }
-
-declare module 'rollup-plugin-external-globals'
 
 // ts高级类型  https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype
 declare type Recordable<T = any> = Record<string, T>
