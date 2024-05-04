@@ -1,0 +1,206 @@
+html,
+body,
+#app {
+	height: 100%;
+	width: 100%;
+	background-color: #f7f7f7;
+}
+
+/**============ flex布局定义 ==============*/
+// 盒子布局
+// 利用class包含定义
+[class*='_flex'] {
+	display: flex;
+	display: -webkit-flex;
+}
+
+// 竖向排列
+[class*='_flex_column'] {
+	flex-flow: column;
+}
+
+// 上下居中
+[class*='_align'] {
+	align-items: center;
+}
+
+// 左右居中
+[class*='_justify'] {
+	justify-content: center;
+}
+
+// 分布两侧
+[class*='_between'] {
+	justify-content: space-between;
+}
+// 分布两侧
+[class*='_end'] {
+	justify-content: flex-end;
+}
+
+// 平均分布（两侧会有间距）
+[class*='_around'] {
+	justify-content: space-around;
+}
+
+// 换行
+[class*='_flex_wrap'] {
+	flex-wrap: wrap;
+}
+/**============ flex布局定义 ==============*/
+
+/**============ 滚动条样式重置 ==============*/
+::-webkit-scrollbar-track-piece {
+	background-color: transparent;
+}
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+	background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: hsla(220, 4%, 58%, 0.3);
+}
+/*滚动条样式*/
+::-webkit-scrollbar {
+	/*滚动条整体样式*/
+	width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	/*滚动条里面小方块*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-track {
+	/*滚动条里面轨道*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0);
+	border-radius: 0;
+	background: #f7f7f7;
+}
+
+// 文字溢出处理
+.text_overflow {
+	overflow: hidden; //超出的文本隐藏
+	text-overflow: ellipsis; //溢出用省略号显示
+	white-space: nowrap; //溢出不换行
+}
+
+.c_p {
+	cursor: pointer;
+}
+
+// 多行文字溢出处理
+.text_overflow_line02 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+/**============ 滚动条样式重置 ==============*/
+
+// ========= 默认margin和padding样式===========
+// 如果添加在后面继续添加更多的数据，并且在for里面更改for循环的length长度
+$sizeNum: (2px) (4px) (6px) (8px) (10px) (12px) (14px) (16px) (18px) (20px) (22px) (24px) (26px) (28px) (30px) (32px) (34px) (36px);
+
+// margin mixin默认定义样式
+@mixin margin($num) {
+	margin: $num !important;
+}
+
+@mixin margin-top($num) {
+	margin-top: $num !important;
+}
+
+@mixin margin-left($num) {
+	margin-left: $num;
+}
+
+@mixin margin-right($num) {
+	margin-right: $num !important;
+}
+
+@mixin margin-bottom($num) {
+	margin-bottom: $num !important;
+}
+
+// padding mixin默认定义样式
+@mixin padding($num) {
+	padding: $num !important;
+}
+
+@mixin padding-top($num) {
+	padding-top: $num !important;
+}
+
+@mixin padding-left($num) {
+	padding-left: $num !important;
+}
+
+@mixin padding-right($num) {
+	padding-right: $num !important;
+}
+
+@mixin padding-bottom($num) {
+	padding-bottom: $num !important;
+}
+
+@for $i from 1 through 9 {
+	// margin
+	.mg#{$i * 2} {
+		@include margin(nth($sizeNum, $i));
+	}
+
+	.mt#{$i * 2} {
+		@include margin-top(nth($sizeNum, $i));
+	}
+
+	.ml#{$i * 2} {
+		@include margin-left(nth($sizeNum, $i));
+	}
+
+	.mb#{$i * 2} {
+		@include margin-bottom(nth($sizeNum, $i));
+	}
+
+	.mr#{$i * 2} {
+		@include margin-right(nth($sizeNum, $i));
+	}
+
+	// padding
+	.pd#{$i * 2} {
+		@include padding(nth($sizeNum, $i));
+	}
+
+	.pt#{$i * 2} {
+		@include padding-top(nth($sizeNum, $i));
+	}
+
+	.pl#{$i * 2} {
+		@include padding-left(nth($sizeNum, $i));
+	}
+
+	.pb#{$i * 2} {
+		@include padding-bottom(nth($sizeNum, $i));
+	}
+
+	.pr#{$i * 2} {
+		@include padding-right(nth($sizeNum, $i));
+	}
+}
+
+// ========= 默认margin和padding样式 ===========
+
+// ========= 宽高样式预设 ===========
+@for $i from 1 through 100 {
+	.h#{$i} {
+		height: #{$i} + '%';
+	}
+	.w#{$i} {
+		width: #{$i} + '%';
+	}
+}
+// ========= 宽高样式预设 ===========
