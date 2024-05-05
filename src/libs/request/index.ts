@@ -21,7 +21,7 @@ const transform: AxiosTransform = {
 		// 是否添加前缀
 		if (joinPrefix) config.url = `/${prefixUrl}${config.url}`
 		// 是否根据环境运行
-		if (isEnv && !import.meta.VITE_IS_BUILD) config.url = `/${import.meta.env.MODE}${config.url}`
+		if (isEnv && !import.meta.env.PROD) config.url = `/${import.meta.env.MODE}${config.url}`
 		// 添加固定的ip端口
 		if (apiUrl && isString(apiUrl)) config.url = `${apiUrl}${config.url}`
 

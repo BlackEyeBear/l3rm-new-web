@@ -2,13 +2,12 @@
  * @Author: panda
  * @Date: 1984-01-24 16:00:00
  * @LastEditors: panda
- * @LastEditTime: 2024-05-03 15:48:07
- * @FilePath: /l3rm-web/Users/admin/Desktop/8eghticar/l3rm-new-web/vite.config.ts
+ * @LastEditTime: 2024-05-05 09:33:11
+ * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\vite.config.ts
  * @Description: 
  */
 import { defineConfig, loadEnv } from 'vite'
 import type { UserConfig, ConfigEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import { wrapperEnv } from './viteConf/utils'
 import { createVitePlugin } from './viteConf/index'
 import { createProxy } from './viteConf/httpProxy'
@@ -16,29 +15,28 @@ import { OUTPUT_DIR } from './viteConf/constant'
 
 import { resolve } from 'path'
 // https://vitejs.dev/config/
-export default defineConfig(({command, mode}:ConfigEnv):UserConfig=>{
-  const root = process.cwd()
+export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
+	const root = process.cwd()
 	const timestamp = new Date().getTime()
 	// loadEnv方法检查项目下的所有环境, 输出NODE_ENV和VITE_开头的键值对,  VITE_开头的键值对后面的不会覆盖前面的,  NODE_ENV的值后面的会覆盖前面的。
 	const env = loadEnv(mode, root)
 	// 处理得到的环境中的变量类型
 	const viteEnv = wrapperEnv(env)
-  const { VITE_PORT, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv
+	const { VITE_PORT, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv
 	const isBuild = command === 'build'
-	import.meta.VITE_IS_BUILD = isBuild
-  return {
-    base: '/',
-    plugins: createVitePlugin(viteEnv, isBuild),
-    resolve: {
-      alias: { '@': resolve(__dirname, 'src'), '#': resolve(__dirname, 'types')},
-    },
-    server: {
+	return {
+		base: '/',
+		plugins: createVitePlugin(viteEnv, isBuild),
+		resolve: {
+			alias: { '@': resolve(__dirname, 'src'), '#': resolve(__dirname, 'types') },
+		},
+		server: {
 			host: true,
 			port: VITE_PORT as unknown as number,
-      // https: false,
+			// https: true,
 			proxy: createProxy(VITE_PROXY)
 		},
-    build: {
+		build: {
 			target: 'es2015',
 			outDir: OUTPUT_DIR,
 			sourcemap: false,
@@ -92,6 +90,6 @@ export default defineConfig(({command, mode}:ConfigEnv):UserConfig=>{
 		preview: {
 			// port: 8080
 		}
-  }
+	}
 
 })

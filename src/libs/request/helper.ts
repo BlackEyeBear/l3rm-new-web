@@ -110,7 +110,7 @@ export const defConf = {
 	// 配置项，下面的选项都可以在独立的接口请求中覆盖
 	requestOptions: {
 		// 所有接口通用部分，可用做ng跳转
-		prefixUrl: 'own/v1/',
+		prefixUrl: import.meta.env.VITE_GLOB_API_URL,
 		// 默认将prefix 添加到url
 		joinPrefix: true,
 		// 需要对返回数据进行处理

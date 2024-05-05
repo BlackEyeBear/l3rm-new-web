@@ -4,7 +4,7 @@
  * @LastEditTime: 2024-05-04 22:42:22
  * @LastEditors: panda
  * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\src\router\index.ts
- * @Description: 
+ * @Description: 路由入口文件
  */
 import {createRouter, createWebHistory} from "vue-router"
 import { PublicRoute } from "./public"

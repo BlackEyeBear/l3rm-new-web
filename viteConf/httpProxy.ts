@@ -1,7 +1,7 @@
 /*
  * @Author: panda
  * @Date: 2021-12-23 09:13:21
- * @LastEditTime: 2022-04-11 11:38:06
+ * @LastEditTime: 2024-05-05 09:37:47
  * @LastEditors: panda
  * @Description: 代理配置
  */
@@ -32,7 +32,7 @@ export function createProxy(list: ProxyList = []) {
 			changeOrigin: true,
 			// 如果您想代理websocket
 			ws: true,
-			rewrite: path => (pathRewrite ? path.replace(new RegExp(`^${prefix}`), '/test') : path.replace(new RegExp(`^${prefix}`), '')),
+			rewrite: path => (pathRewrite ? path.replace(new RegExp(`^${prefix}`), pathRewrite) : path.replace(new RegExp(`^${prefix}`), '')),
 			// https设置
 			...(isHttps ? { secure: false } : {})
 		}
