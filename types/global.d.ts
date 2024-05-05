@@ -2,7 +2,7 @@
  * @Author: panda
  * @Date: 2024-05-03 14:35:10
  * @LastEditors: panda
- * @LastEditTime: 2024-05-04 22:37:41
+ * @LastEditTime: 2024-05-05 14:58:58
  * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\types\global.d.ts
  * @Description: 全局接口
  */
@@ -10,7 +10,7 @@
 /// <reference types="vite/client" />
 
 declare module '*.vue' {
-	import { DefineComponent } from 'vue'
+	import type { DefineComponent } from 'vue'
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
 	const component: DefineComponent<{}, {}, any>
 	export default component
@@ -55,7 +55,7 @@ declare type TargetContext = '_self' | '_blank'
 declare type DateRange = { startDate: string; endDate: string }
 
 // ts高级类型  https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype
-declare type Recordable<T = any> = Record<string, T>
+type Recordable<T = any> = Record<string, T>
 
 declare type Indexable<T = any> = {
 	[key: string]: T
