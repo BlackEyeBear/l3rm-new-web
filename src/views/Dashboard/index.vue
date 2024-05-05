@@ -7,13 +7,13 @@
  * @Description: Dashboard
 -->
 <template>
-	<div>123</div>
+	<div>dashboard</div>
 </template>
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { login } from '@/api/user/login'
 onMounted(() => {
-	login({ username: 'admin2', password: 'lianche582' }).then(res => {
+	login({ username: 'admin', password: 'lianche58' }).then(res => {
 		console.log(res)
 	})
 })

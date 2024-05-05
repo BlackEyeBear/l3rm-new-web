@@ -1,9 +1,5 @@
 <template>
-  <div>
-    404
-  </div>
+	<div>errorpage</div>
 </template>
-<script setup lang="ts">
-const b = 123
-</script>
+<script setup lang="ts"></script>
 <style lang="scss" scoped></style>

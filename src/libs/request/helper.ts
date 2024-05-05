@@ -1,7 +1,7 @@
 /*
  * @Author: panda
  * @Date: 2021-12-31 09:11:15
- * @LastEditTime: 2022-05-08 14:29:41
+ * @LastEditTime: 2024-05-05 10:55:26
  * @LastEditors: panda
  * @Description: 工具函数
  */
@@ -63,7 +63,7 @@ export const errorCode = {
 // 通过状态提示对应的信息
 const { createMessage, createConfirmModal } = useMessage()
 export function checkStatus(code: number, msg: string, errorMessageMode: ErrorMessageMode = 'message') {
-	const errMessage = errorCode[code as keyof typeof errorCode] || msg || '未知错误'
+	const errMessage = msg || errorCode[code as keyof typeof errorCode] || '未知错误'
 	if (errorMessageMode === 'modal') createConfirmModal('sys.api.errorTip', errMessage)
 	else if (errorMessageMode === 'message') createMessage.error(errMessage)
 }

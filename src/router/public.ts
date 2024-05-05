@@ -8,11 +8,13 @@
  */
 import { RouteRecordRaw } from "vue-router"
 
-import NotFind from "@/views/ErrorPage/404.vue"
-import Dashboard from "@/views/Dashboard/index.vue";
+import NotFind from "@/views/errorPage/404.vue"
+import Dashboard from "@/views/dashboard/index.vue";
+import Login from "@/views/login/index.vue";
 
 export const PublicRoute: Array<RouteRecordRaw> = [
   { path: '/', component: Dashboard },
-  // { path: '/404', name: '404', component: NotFind },
-  // { path: '/:catchAll(.*)', redirect: '404' }
+  { path: '/login', component: Login },
+  { path: '/404', name: '404', component: NotFind },
+  { path: '/:catchAll(.*)', redirect: '404' }
 ]

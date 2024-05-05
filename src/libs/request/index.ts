@@ -87,15 +87,17 @@ const transform: AxiosTransform = {
 		// ?? 空值合并操作符，只有当左侧为null和undefined时，才会返回右侧的数
 		const { response, code, message, config } = error || {}
 		const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
-		const msg: string = response?.data?.error?.message ?? ''
+		const msg: string = response?.data?.message ?? ''
 		const err: string = error?.toString?.() ?? ''
 		let errMessage = ''
+		console.log(error)
 		// 根据返回状态码是否正常
 		try {
-			if (err?.includes('401')) {
+			// 处理token过期情况，由于后端登录时除正常情况外都是返回的401，所以添加msg判断
+			if (err?.includes('401') && !msg) {
 				sessionStorage.clear()
-				location.href = '/login'
 				errMessage = tokenExpire
+				location.href = '/login'
 			}
 
 			if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) errMessage = '请求超时'
@@ -130,42 +132,42 @@ const transform: AxiosTransform = {
 		// 返回原始数据，用于下载或者上传文件或其他特色处理
 		if (isReturnNativeResponse) return res
 		if (!isTransformRequestResult) return res.data
+		if(res.data) return res.data
 		if (!res.data) return createMessage.error('请求失败请重试')
+		// const { code, msg, data } = res.data
 
-		const { code, msg, data } = res.data
+		// // 如果是未定义的code的错误处理
+		// const isSuccess = Reflect.has(res.data, 'code') && code === ResultEnum.SUCCESS
 
-		// 如果是未定义的code的错误处理
-		const isSuccess = Reflect.has(res.data, 'code') && code === ResultEnum.SUCCESS
+		// // 请求成功后直接返回数据
+		// if (isSuccess && (isObject(data) || isArray(data))) return data
 
-		// 请求成功后直接返回数据
-		if (isSuccess && (isObject(data) || isArray(data))) return data
+		// // 统一提示错误信息
+		// if (code === ResultEnum.ERROR || code === ResultEnum.FAILED) {
+		// 	createMessage.error(data || msg)
+		// 	return Promise.reject(new Error('请求错误，请稍后重试！'))
+		// }
 
-		// 统一提示错误信息
-		if (code === ResultEnum.ERROR || code === ResultEnum.FAILED) {
-			createMessage.error(data || msg)
-			return Promise.reject(new Error('请求错误，请稍后重试！'))
-		}
+		// // 处理token过期情况
+		// if (code === ResultEnum.IDENTITY) {
+		// 	sessionStorage.clear()
+		// 	// location.href = '/login'
+		// 	createMessage.error(tokenExpire)
+		// 	return Promise.reject(new Error(data))
+		// }
 
-		// 处理token过期情况
-		if (code === ResultEnum.IDENTITY) {
-			sessionStorage.clear()
-			location.href = '/login'
-			createMessage.error(tokenExpire)
-			return Promise.reject(new Error(data))
-		}
+		// if (options.errorMessageMode === 'message') {
+		// 	createMessage.error(data || msg)
+		// 	return Promise.reject(new Error(data))
+		// }
+		// // 比较重要的错误
+		// else if (options.errorMessageMode === 'modal') {
+		// 	createConfirmModal('错误提示', data || msg)
+		// 	return Promise.reject(new Error(errorResult))
+		// }
 
-		if (options.errorMessageMode === 'message') {
-			createMessage.error(data || msg)
-			return Promise.reject(new Error(data))
-		}
-		// 比较重要的错误
-		else if (options.errorMessageMode === 'modal') {
-			createConfirmModal('错误提示', data || msg)
-			return Promise.reject(new Error(errorResult))
-		}
-
-		// 如果有信息，就提示信息，且返回一个promise
-		return Promise.reject(new Error(errorResult))
+		// // 如果有信息，就提示信息，且返回一个promise
+		// return Promise.reject(new Error(errorResult))
 	}
 }
 
