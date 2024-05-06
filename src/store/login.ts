@@ -1,24 +1,33 @@
+/*
+ * @Author: panda
+ * @Date: 2024-05-05 16:26:52
+ * @LastEditTime: 2024-05-06 22:00:14
+ * @LastEditors: panda
+ * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\src\store\login.ts
+ * @Description: 登录数据处理
+ */
 import { defineStore } from 'pinia'
-import { login } from '../api/user/login';
+import router from "@/router/index"
+interface UserInfo {
+  id: number | null,
+  username: string,
+  nickname: string,
+  avatar: string,
+  departId: number | null,
+  departName: string
+  isMultiDepartAuth: boolean,
+  hasDepartAuth: boolean,
+  mobile: string
+  roles: string[],
+  permissions: string[],
 
+}
 interface State {
-  userInfo: {
-    id: number | null,
-    username: string,
-    nickname: string,
-    avatar: string,
-    departId: number | null,
-    departName: string
-    isMultiDepartAuth: boolean,
-    hasDepartAuth: boolean,
-    mobile: string
-    roles: string[],
-    permissions: string[],
-  },
+  userInfo: UserInfo
   token: string,
 }
 
-export const useStore = defineStore('login', {
+export const useStoreLogin = defineStore('login', {
   state: (): State => ({
     userInfo: {
       id: null,
@@ -54,21 +63,23 @@ export const useStore = defineStore('login', {
     },
   },
   actions: {
-    setUserInfo() { },
-    setToken() { },
-    LoginOut() { },
-    ResetUserInfo() { },
-    async LoginIn(form: { password: string, username: string }) {
-      try {
-        console.log(form, 'form')
-        const res = await login(form)
-        console.log(res.userInfo, 'sadasdasdas')
-        this.$state.userInfo = res.userInfo
-        this.$state.token = res.token
-      } catch (error) {
-        console.error(error)
-      }
+    setUserInfo(userInfo: UserInfo) {
+      this.$state.userInfo = userInfo
+    },
+    setToken(token: string) {
+      this.$state.token = token
+    },
+    loginOut() {
+      this.$reset()
+      sessionStorage.clear()
+      router.push({ name: 'login', replace: true })
+    },
+    resetUserInfo() {
+      this.$reset()
     },
   },
-  persist: true
+  persist: {
+    key: "L3RM-STORE",
+    storage: sessionStorage
+  }
 })

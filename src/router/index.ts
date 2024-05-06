@@ -9,13 +9,18 @@
 import { useTitle } from "@vueuse/core"
 import {createRouter, createWebHistory} from "vue-router"
 import { PublicRoute } from "./public"
+import { useStoreLogin } from '@/store/login'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: PublicRoute
 })
 
+const whiteList = ['login']
+
 router.beforeEach((to, from, next)=>{
+  const store = useStoreLogin()
+  console.log(store.token, '----')
   // if(token) {
     
   // }
