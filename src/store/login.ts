@@ -47,6 +47,7 @@ export const useStoreLogin = defineStore('login', {
   getters: {
     userInfo: (state) => state.userInfo,
     token: (state) => state.token,
+    isAdmin: (state) => state.userInfo.username === 'admin',
     isMultiDepartAuth: (state) => state.userInfo.username === 'admin' || state.userInfo.isMultiDepartAuth,
     hasDepartAuth: (state) => state.userInfo.username === 'admin' || state.userInfo.hasDepartAuth,
     hasRole: (state) => (role: string) => state.userInfo.username === 'admin' || (state.userInfo.roles && state.userInfo.roles.includes(role)),
@@ -74,8 +75,8 @@ export const useStoreLogin = defineStore('login', {
       sessionStorage.clear()
       router.push({ name: 'login', replace: true })
     },
-    resetUserInfo() {
-      this.$reset()
+    resetUserInfo(userInfo: UserInfo) {
+      this.$state.userInfo = Object.assign(this.$state.userInfo, userInfo)
     },
   },
   persist: {
