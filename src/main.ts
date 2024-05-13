@@ -12,8 +12,14 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate"
 import { RouterViewCom } from "@/router/routerView"
 import router from "@/router/index"
 import './styles/index.scss'
-
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { setupCustomDirective } from "@/libs/directive"
+
 const app = createApp(RouterViewCom())
 setupCustomDirective(app)
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+
 app.use(createPinia().use(piniaPluginPersistedstate)).use(router).mount('#app')

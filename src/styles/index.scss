@@ -1,4 +1,78 @@
-@import "./config.scss";
-@import "./normalize.scss";
-@import "./public.scss";
-@import "./elementCssReset.scss"
+@import './config.scss';
+@import './normalize.scss';
+@import './public.scss';
+@import './elementCssReset.scss';
+.el-container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.el-container.mobile.openside {
+	position: fixed;
+	top: 0;
+}
+
+.el-aside {
+	-webkit-transition: width 0.2s;
+	transition: width 0.2s;
+	// width: $width-aside;
+	background-color: $bg-aside;
+	height: 100%;
+	z-index: 1001;
+	overflow: hidden;
+
+	.el-menu {
+		border-right: none;
+	}
+}
+
+.aside {
+	.el-menu-vertical {
+		background-color: $bg-aside;
+	}
+	.el-submenu {
+		background-color: $bg-aside;
+		.el-menu {
+			.el-menu-item {
+				background-color: #000408;
+				height: 44px;
+				line-height: 44px;
+			}
+			.is-active {
+				background-color: #1890ff;
+				// 关闭三级菜单二级菜单样式
+				ul {
+					border: none;
+				}
+			}
+			// 关闭三级菜单二级菜单样式
+			.is-active.is-opened {
+				background-color: #191a23;
+				ul {
+					border: none;
+				}
+			}
+		}
+	}
+	.el-menu-item:focus,
+	.el-menu-item:hover {
+		background-color: transparent;
+	}
+	.el-menu-item:hover i,
+	.el-menu-item:hover span {
+		color: #fff;
+	}
+
+	.el-submenu__title:hover {
+		background-color: $bg-aside;
+	}
+
+	.el-submenu__title:hover i,
+	.el-submenu__title:hover span {
+		color: #fff;
+	}
+	.el-menu--inline {
+		border-left: 5px solid #2c3b41;
+	}
+}

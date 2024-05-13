@@ -9,13 +9,13 @@ body,
 /**============ flex布局定义 ==============*/
 // 盒子布局
 // 利用class包含定义
-[class*='_flex'] {
+[class*='flex'] {
 	display: flex;
 	display: -webkit-flex;
 }
 
 // 竖向排列
-[class*='_flex_column'] {
+[class*='flex_column'] {
 	flex-flow: column;
 }
 
