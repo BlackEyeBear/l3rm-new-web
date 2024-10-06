@@ -1,17 +1,9 @@
 <!--
  * @Author: panda
  * @Date: 2024-05-05 15:06:08
- * @LastEditTime: 2024-05-12 17:08:08
+ * @LastEditTime: 2024-10-06 14:43:22
  * @LastEditors: panda
- * @FilePath: \l3rm-new-web\src\view\layout\index.vue
- * @Description: 
--->
-<!--
- * @Author: panda
- * @Date: 2024-05-05 15:06:08
- * @LastEditTime: 2024-05-12 13:59:35
- * @LastEditors: panda
- * @FilePath: \l3rm-new-web\src\view\layout\index.vue
+ * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\src\view\layout\index.vue
  * @Description: 页面布局入口
 -->
 <template>

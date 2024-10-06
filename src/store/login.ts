@@ -1,7 +1,7 @@
 /*
  * @Author: panda
  * @Date: 2024-05-05 16:26:52
- * @LastEditTime: 2024-05-06 22:00:14
+ * @LastEditTime: 2024-10-06 14:47:31
  * @LastEditors: panda
  * @FilePath: \l3rm-webf:\mywork\l3rm-new-web\src\store\login.ts
  * @Description: 登录数据处理
@@ -20,8 +20,8 @@ interface UserInfo {
   mobile: string
   roles: string[],
   permissions: string[],
-
 }
+
 interface State {
   userInfo: UserInfo
   token: string,
